@@ -3,38 +3,24 @@ server:
 
 spring:
   application:
-    name: Vyntra-ApiGatway
+    name: Vyntra-ApiGateway
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
   cloud:
     compatibility-verifier:
       enabled: false
     gateway:
       routes:
         - id: bff-vyntra
-          uri: lb://BffVyntra
+          uri: ${BFF_SERVICE_URL:http://localhost:8443}
           predicates:
-            - Path=/api/v1/auth/**, /api/v2/auth/**
-        - id: user-service
-          uri: http://localhost:8081
-          predicates:
-            - Path=/api/v1/users/**
-        - id: product-service
-          uri: http://localhost:8082
-          predicates:
-            - Path=/api/v1/products/**
-        - id: order-service
-          uri: http://localhost:8083
-          predicates:
-            - Path=/api/v1/orders/**, /api/v1/abc/**
-        - id: payment-service
-          uri: lb://Vyntra-Payment-Service
-          predicates:
-            - Path=/api/v1/payments/**
-        - id: inventory-service
-          uri: http://localhost:8084
-          predicates:
-            - Path=/api/v1/inventory/**, /api/v1/stock/**, /api/v2/stock/**
-        - id: home-service
-          uri: http://localhost:8085
-          predicates:
-            - Path=/api/v1/home/**,
-
+            - Path=/api/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@clientRateLimitKeyResolver}"
+                redis-rate-limiter.replenishRate: ${GATEWAY_RATE_LIMIT_REPLENISH_RATE:50}
+                redis-rate-limiter.burstCapacity: ${GATEWAY_RATE_LIMIT_BURST_CAPACITY:100}
+                redis-rate-limiter.requestedTokens: 1
