@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: X-ApiGateway
+    name: x-api-gateway
   data:
     redis:
       host: ${REDIS_HOST:localhost}
@@ -13,7 +13,7 @@ spring:
       enabled: false
     gateway:
       routes:
-        - id: bff-vyntra
+        - id: x-bff
           uri: ${BFF_SERVICE_URL:http://localhost:8443}
           predicates:
             - Path=/api/**

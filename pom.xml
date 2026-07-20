@@ -11,8 +11,8 @@
 	<groupId>com.x</groupId>
 	<artifactId>x-api-gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Vyntra-Api-Gateway</name>
-	<description>Vyntra API Gateway</description>
+	<name>x-api-gateway</name>
+	<description>x-api-gateway</description>
 	<url/>
 	<licenses>
 		<license/>
