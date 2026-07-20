@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: Vyntra-ApiGateway
+    name: X-ApiGateway
   data:
     redis:
       host: ${REDIS_HOST:localhost}

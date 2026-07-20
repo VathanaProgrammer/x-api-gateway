@@ -1,10 +1,10 @@
-package com.vyntra.gateway;
+package com.x.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class VyntraApiGatewayApplicationTests {
+class XApiGatewayApplicationTests {
 
     @Test
     void contextLoads() {

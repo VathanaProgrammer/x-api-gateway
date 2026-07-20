@@ -1,4 +1,4 @@
-package com.vyntra.gateway.config;
+package com.x.gateway.config;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.http.server.reactive.MockServerHttpRequest;

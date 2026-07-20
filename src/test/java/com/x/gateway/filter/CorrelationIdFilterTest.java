@@ -1,4 +1,4 @@
-package com.vyntra.gateway.filter;
+package com.x.gateway.filter;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;

@@ -8,8 +8,8 @@
 		<version>3.5.14</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.vyntra</groupId>
-	<artifactId>api-gateway</artifactId>
+	<groupId>com.x</groupId>
+	<artifactId>x-api-gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Vyntra-Api-Gateway</name>
 	<description>Vyntra API Gateway</description>
