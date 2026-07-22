@@ -30,7 +30,30 @@
 		<java.version>17</java.version>
 		<spring-cloud.version>2024.0.0</spring-cloud.version>
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>github-x-sharedlib</id>
+			<url>https://maven.pkg.github.com/VathanaProgrammer/x-sharedlib</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
 	<dependencies>
+		<!-- Shared helpers; exclude servlet web (gateway is WebFlux) -->
+		<dependency>
+			<groupId>com.x</groupId>
+			<artifactId>x-sharedlib</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-web</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-gateway</artifactId>

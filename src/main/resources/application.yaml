@@ -2,12 +2,19 @@ server:
   port: 7555
 
 spring:
+  banner:
+    location: classpath:banner.txt
+    mode: console
   application:
     name: x-api-gateway
+  profiles:
+    default: local
   data:
     redis:
-      host: ${REDIS_HOST:localhost}
+      host: ${REDIS_HOST:127.0.0.1}
       port: ${REDIS_PORT:6379}
+      timeout: 2s
+      connect-timeout: 2s
   cloud:
     compatibility-verifier:
       enabled: false
@@ -24,3 +31,27 @@ spring:
                 redis-rate-limiter.replenishRate: ${GATEWAY_RATE_LIMIT_REPLENISH_RATE:50}
                 redis-rate-limiter.burstCapacity: ${GATEWAY_RATE_LIMIT_BURST_CAPACITY:100}
                 redis-rate-limiter.requestedTokens: 1
+
+# Rate-limit KeyResolver bean always on (needs Redis)
+x:
+  gateway:
+    rate-limit:
+      enabled: true
+  http:
+    logging:
+      enabled: true
+      server: x-api-gateway
+      # Log all public API traffic; hop arrow per route
+      path-prefixes:
+        - /api
+      hop: "x-api-gateway → x-bff"
+      hops:
+        /api/v1/auth: "x-api-gateway → x-bff → x-user-service"
+        /api/v1/files: "x-api-gateway → x-bff → x-storage-service"
+        /api/v1/products: "x-api-gateway → x-bff → x-product-service"
+        /api/v1/orders: "x-api-gateway → x-bff → x-order-service"
+        /api/v1/businesses: "x-api-gateway → x-bff → x-business-service"
+        /api/v1/shops: "x-api-gateway → x-bff → x-shop-service"
+        /api/v1/stock: "x-api-gateway → x-bff → x-inventory-service"
+        /api/v1/home: "x-api-gateway → x-bff → x-inventory-service"
+        /api/v1/payments: "x-api-gateway → x-bff → x-payment-service"
